@@ -1,0 +1,16 @@
+# a0
+# Part 1: Finding your way:
+The problem is to find Luddy Hall, which is represented by “@” starting from the initial position, which is represented by “#”. There are several buildings which are represented by “&”. The only moves allowed are through the path that is represented using “.”.
+Here, the successor function gives all the valid moves that can be traversed with the distance that is covered from the initial state. The coordinates of the next possible points are stored in the fringe along with the distance from the initial position
+Initially, the problem was that the execution was entering into an infinite loop as it was returning to the previous step over and over again. This was solved by keeping a track of all the visited nodes. If a particular node is already visited, current position should not make a move to get back to the previous node. For this, a list is introduced which keeps a track of all the visited nodes.
+The next challenge was to find the nodes that are traversed in the actual path that was taken to reach the goal. For this adjacency is checked starting from the goal position. Since it is possible to go to a node only if it is a horizontal or a vertical neighbour, the check for adjacency is checked from the goal state which ensures that no other paths(not leading to the goal state) are considered. Diagonal moves are also removed.
+While finding the path in the form of directions, the traversing is considered from the initial position until the destination or goal is reached. If the next node is above the current node, the path is appended with “N” and accordingly with respect to the other three principal directions.
+
+# Part 1: Hide-and-Seek:
+The goal is to place all the “k” friends on the IUB map in such a way that no friend can see each other. Two friends cannot see each other if they have a building(i.e. & or @) between them. If two friends are in the same row or the same column and they do not have any building between them. A friend can be placed only on the nodes that are represented by “.”
+The successor function stores all the successors of the current state. all the states are stored in the fringe. The fringe stores the state of the map wihch are to be scanned. Initially, it stores the starting value of the map. After placing one friend, the fringe stores the new map.
+In order to solve the problem, for a point, all the four directions (up, down, left, and right) must be checked for any ‘F’ directly coming in sight of the current node under consideration. For checking for the neighbors, the primary condition is to ignore all the “.” Surrounding the node. If all the possible neighbours of a node are either “@”, “&” or “#”, a friend can be placed there. The goal state is attained if all the ‘k’ friends are placed in the map.
+For considering a state of the graph, a list is maintained which stores all the states that are already considered. This ensures that the execution does not enter infinite condition in which it considers all the states over and over again. 
+For checking the neighbours, function named check() is defined which takes the board and the coordinates of a node as the input parameters. This function returns False if it finds a friend located before any building. If in all the 4 directions, the node is surrounded by buildings or no friend.
+
+
